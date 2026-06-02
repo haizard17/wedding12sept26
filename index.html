@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fariz & Elia | Wedding RSVP</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cream: #fff8ec;
+      --ivory: #fffdf7;
+      --sage: #a8b98e;
+      --sage-dark: #5e6f4d;
+      --forest: #3f4a32;
+      --gold: #d9b66f;
+      --blush: #e8b7a7;
+      --white-glass: rgba(255, 255, 255, 0.72);
+      --shadow: 0 24px 70px rgba(63, 74, 50, 0.16);
+      --radius: 28px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      color: var(--forest);
+      background:
+        radial-gradient(circle at 20% 15%, rgba(232, 183, 167, 0.34), transparent 28%),
+        radial-gradient(circle at 82% 25%, rgba(217, 182, 111, 0.22), transparent 32%),
+        linear-gradient(180deg, var(--cream), #f7f2df 52%, #edf1de);
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -2;
+      filter: blur(20px);
+      opacity: 0.5;
+    }
+
+    body::before {
+      left: -180px;
+      top: 18%;
+      background: rgba(168, 185, 142, 0.45);
+      animation: floatOrb 12s ease-in-out infinite;
+    }
+
+    body::after {
+      right: -170px;
+      bottom: 12%;
+      background: rgba(217, 182, 111, 0.35);
+      animation: floatOrb 15s ease-in-out infinite reverse;
+    }
+
+    @keyframes floatOrb {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-34px); }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+
+    .page {
+      position: relative;
+      min-height: 100vh;
+    }
+
+    .fairy-dust {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .fairy-dust span {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(217, 182, 111, 0.8);
+      box-shadow: 0 0 14px rgba(217, 182, 111, 0.9);
+      animation: sparkle 8s linear infinite;
+      opacity: 0;
+    }
+
+    .fairy-dust span:nth-child(1) { left: 8%; animation-delay: 0s; animation-duration: 9s; }
+    .fairy-dust span:nth-child(2) { left: 18%; animation-delay: 1.5s; animation-duration: 11s; }
+    .fairy-dust span:nth-child(3) { left: 32%; animation-delay: 0.7s; animation-duration: 8s; }
+    .fairy-dust span:nth-child(4) { left: 47%; animation-delay: 2.3s; animation-duration: 12s; }
+    .fairy-dust span:nth-child(5) { left: 61%; animation-delay: 0.2s; animation-duration: 10s; }
+    .fairy-dust span:nth-child(6) { left: 73%; animation-delay: 1.1s; animation-duration: 9s; }
+    .fairy-dust span:nth-child(7) { left: 86%; animation-delay: 2.8s; animation-duration: 13s; }
+    .fairy-dust span:nth-child(8) { left: 94%; animation-delay: 1.9s; animation-duration: 10s; }
+
+    @keyframes sparkle {
+      0% {
+        transform: translateY(105vh) scale(0.4);
+        opacity: 0;
+      }
+      18% { opacity: 1; }
+      55% { opacity: 0.75; }
+      100% {
+        transform: translateY(-12vh) scale(1.1);
+        opacity: 0;
+      }
+    }
+
+    .navbar {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1080px, calc(100% - 32px));
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      border: 1px solid rgba(217, 182, 111, 0.28);
+      border-radius: 999px;
+      background: rgba(255, 253, 247, 0.76);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 12px 38px rgba(63, 74, 50, 0.1);
+    }
+
+    .brand {
+      font-family: "Great Vibes", cursive;
+      font-size: 30px;
+      color: var(--sage-dark);
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      font-size: 13px;
+      color: rgba(63, 74, 50, 0.8);
+    }
+
+    .nav-links a {
+      transition: 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 120px 20px 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255, 248, 236, 0.45), rgba(255, 248, 236, 0.94)),
+        url("https://images.unsplash.com/photo-1468327768560-75b778cbb551?auto=format&fit=crop&w=1800&q=80") center/cover;
+      z-index: -3;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 760px;
+      height: 760px;
+      border: 1px solid rgba(217, 182, 111, 0.28);
+      border-radius: 50%;
+      z-index: -1;
+      animation: rotateGlow 35s linear infinite;
+    }
+
+    @keyframes rotateGlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-card {
+      width: min(760px, 100%);
+      padding: 54px 34px 44px;
+      text-align: center;
+      background: rgba(255, 253, 247, 0.74);
+      border: 1px solid rgba(217, 182, 111, 0.36);
+      border-radius: 38px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      position: relative;
+      animation: fadeUp 1.1s ease both;
+    }
+
+    .hero-card::before,
+    .hero-card::after {
+      content: "✦";
+      position: absolute;
+      color: var(--gold);
+      font-size: 34px;
+      animation: twinkle 2.8s ease-in-out infinite;
+    }
+
+    .hero-card::before {
+      top: 26px;
+      left: 32px;
+    }
+
+    .hero-card::after {
+      right: 32px;
+      bottom: 26px;
+      animation-delay: 1.2s;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.35; transform: scale(0.85) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.1) rotate(20deg); }
+    }
+
+    .small-label {
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--sage-dark);
+      margin-bottom: 18px;
+    }
+
+    .couple-names {
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(64px, 12vw, 128px);
+      line-height: 0.82;
+      color: var(--forest);
+      text-shadow: 0 7px 0 rgba(217, 182, 111, 0.12);
+    }
+
+    .ampersand {
+      display: block;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(42px, 7vw, 70px);
+      color: var(--gold);
+      margin: 12px 0 6px;
+    }
+
+    .hero-date {
+      margin-top: 26px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(25px, 4vw, 38px);
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .hero-venue {
+      margin-top: 10px;
+      color: rgba(63, 74, 50, 0.74);
+      font-size: 15px;
+    }
+
+    .button-row {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(217, 182, 111, 0.5);
+      font-weight: 500;
+      font-size: 14px;
+      transition: 0.3s ease;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.55);
+      color: var(--forest);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--gold), #f1dc9c);
+      color: #473716;
+      box-shadow: 0 14px 34px rgba(217, 182, 111, 0.28);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(63, 74, 50, 0.16);
+    }
+
+    section {
+      padding: 86px 20px;
+      position: relative;
+    }
+
+    .container {
+      width: min(1080px, 100%);
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 38px;
+    }
+
+    .section-title .eyebrow {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .section-title h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(38px, 6vw, 62px);
+      line-height: 1.02;
+      font-weight: 700;
+      color: var(--forest);
+    }
+
+    .section-title p {
+      max-width: 620px;
+      margin: 14px auto 0;
+      color: rgba(63, 74, 50, 0.72);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .glass-card {
+      background: var(--white-glass);
+      border: 1px solid rgba(217, 182, 111, 0.28);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .count-box {
+      padding: 28px 16px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .count-box::before {
+      content: "";
+      position: absolute;
+      inset: -80px;
+      background: conic-gradient(from 180deg, transparent, rgba(217, 182, 111, 0.22), transparent 32%);
+      animation: spin 7s linear infinite;
+    }
+
+    .count-box > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .count-number {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(38px, 8vw, 74px);
+      font-weight: 700;
+      color: var(--sage-dark);
+    }
+
+    .count-label {
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: rgba(63, 74, 50, 0.62);
+    }
+
+    .quote-card {
+      padding: 42px;
+      text-align: center;
+      max-width: 850px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .quote-card::before {
+      content: "“";
+      position: absolute;
+      top: -24px;
+      left: 36px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 120px;
+      color: rgba(217, 182, 111, 0.22);
+    }
+
+    .quote-card h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(28px, 5vw, 46px);
+      line-height: 1.18;
+      font-weight: 600;
+      margin-bottom: 22px;
+    }
+
+    .quote-card p {
+      line-height: 1.9;
+      color: rgba(63, 74, 50, 0.78);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .info-card {
+      padding: 34px;
+    }
+
+    .info-card h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 34px;
+      margin-bottom: 18px;
+      color: var(--sage-dark);
+    }
+
+    .info-card p {
+      color: rgba(63, 74, 50, 0.74);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid rgba(168, 185, 142, 0.26);
+    }
+
+    .timeline-time {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .timeline-text strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .location-card {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      overflow: hidden;
+    }
+
+    .location-content {
+      padding: 38px;
+    }
+
+    .location-content h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 42px;
+      color: var(--sage-dark);
+      margin-bottom: 12px;
+    }
+
+    .map-preview {
+      min-height: 340px;
+      background:
+        linear-gradient(rgba(63, 74, 50, 0.18), rgba(63, 74, 50, 0.28)),
+        url("https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80") center/cover;
+      display: grid;
+      place-items: center;
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .map-preview span {
+      padding: 14px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(12px);
+    }
+
+    .rsvp-card {
+      padding: 40px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    form {
+      display: grid;
+      gap: 18px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    label {
+      display: grid;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(63, 74, 50, 0.75);
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid rgba(168, 185, 142, 0.45);
+      background: rgba(255, 255, 255, 0.75);
+      border-radius: 18px;
+      padding: 14px 15px;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--forest);
+      outline: none;
+      transition: 0.3s ease;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px rgba(217, 182, 111, 0.16);
+    }
+
+    .submit-message {
+      display: none;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(168, 185, 142, 0.22);
+      color: var(--sage-dark);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .wishes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .wish-card {
+      padding: 24px;
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .wish-card p {
+      line-height: 1.75;
+      color: rgba(63, 74, 50, 0.76);
+      font-size: 14px;
+    }
+
+    .wish-card strong {
+      color: var(--sage-dark);
+      margin-top: 20px;
+      display: block;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .contact-card {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .contact-card h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 34px;
+      color: var(--sage-dark);
+      margin-bottom: 8px;
+    }
+
+    .contact-card p {
+      color: rgba(63, 74, 50, 0.7);
+      margin-bottom: 20px;
+    }
+
+    footer {
+      padding: 46px 20px 70px;
+      text-align: center;
+      color: rgba(63, 74, 50, 0.68);
+    }
+
+    footer .footer-names {
+      font-family: "Great Vibes", cursive;
+      font-size: 44px;
+      color: var(--sage-dark);
+      margin-bottom: 8px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.9s ease forwards;
+      animation-timeline: view();
+      animation-range: entry 10% cover 30%;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav-links {
+        display: none;
+      }
+
+      .navbar {
+        justify-content: center;
+      }
+
+      .hero-card {
+        padding: 46px 22px 36px;
+      }
+
+      .countdown-grid,
+      .two-column,
+      .location-card,
+      .wishes-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .location-card {
+        gap: 0;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      section {
+        padding: 70px 16px;
+      }
+
+      .hero {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .small-label {
+        letter-spacing: 3px;
+      }
+
+      .countdown-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .quote-card,
+      .info-card,
+      .location-content,
+      .rsvp-card {
+        padding: 28px 20px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="fairy-dust" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+
+    <nav class="navbar">
+      <a class="brand" href="#home">Fariz & Elia</a>
+      <div class="nav-links">
+        <a href="#countdown">Countdown</a>
+        <a href="#details">Details</a>
+        <a href="#location">Location</a>
+        <a href="#rsvp">RSVP</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <header class="hero" id="home">
+      <div class="hero-card">
+        <p class="small-label">The Wedding of</p>
+        <h1 class="couple-names">
+          Fariz Hakimi
+          <span class="ampersand">&</span>
+          Elia Irdina
+        </h1>
+        <p class="hero-date">Saturday, 12 September 2026</p>
+        <p class="hero-venue">Maha Casa Villa, Hulu Langat, Selangor</p>
+        <div class="button-row">
+          <a class="btn primary" href="#rsvp">RSVP Now</a>
+          <a class="btn" href="#details">View Invitation</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="countdown">
+        <div class="container reveal">
+          <div class="section-title">
+            <p class="eyebrow">Counting Days</p>
+            <h2>To Our Fairytale</h2>
+            <p>Every second brings us closer to a magical garden celebration filled with love, doa and beautiful memories.</p>
+          </div>
+
+          <div class="countdown-grid">
+            <div class="count-box glass-card">
+              <div class="count-number" id="days">000</div>
+              <div class="count-label">Days</div>
+            </div>
+            <div class="count-box glass-card">
+              <div class="count-number" id="hours">00</div>
+              <div class="count-label">Hours</div>
+            </div>
+            <div class="count-box glass-card">
+              <div class="count-number" id="minutes">00</div>
+              <div class="count-label">Minutes</div>
+            </div>
+            <div class="count-box glass-card">
+              <div class="count-number" id="seconds">00</div>
+              <div class="count-label">Seconds</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="details">
+        <div class="container">
+          <div class="section-title reveal">
+            <p class="eyebrow">Invitation</p>
+            <h2>A Garden Fairytale Begins</h2>
+            <p>Together with our families, we joyfully invite you to celebrate our wedding day.</p>
+          </div>
+
+          <div class="quote-card glass-card reveal">
+            <h3>Two hearts, one promise, and a lifetime of love written like a fairytale.</h3>
+            <p>
+              Ya Allah, berkatilah perkahwinan ini, satukanlah hati mereka dalam kasih sayang,
+              rahmatilah rumah tangga mereka, dan kurniakanlah kebahagiaan hingga ke Jannah. Amin.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container two-column">
+          <div class="info-card glass-card reveal">
+            <h3>Wedding Itinerary</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-time">11:00 AM</div>
+                <div class="timeline-text">
+                  <strong>Guest Arrival</strong>
+                  <span>Welcome to our garden celebration.</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-time">12:00 PM</div>
+                <div class="timeline-text">
+                  <strong>Wedding Reception</strong>
+                  <span>Lunch and family gathering.</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-time">1:00 PM</div>
+                <div class="timeline-text">
+                  <strong>Couple Entrance</strong>
+                  <span>The fairytale moment begins.</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-time">4:00 PM</div>
+                <div class="timeline-text">
+                  <strong>Event Ends</strong>
+                  <span>Thank you for celebrating with us.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card glass-card reveal">
+            <h3>Dress Code</h3>
+            <p><strong>Formal Dress</strong></p>
+            <p>Kindly dress in formal attire to match our Garden Fairytales celebration.</p>
+            <p>Suggested colors: cream, beige, sage, champagne, soft pastel or earth tones.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="location">
+        <div class="container">
+          <div class="location-card glass-card reveal">
+            <div class="location-content">
+              <p class="small-label">Venue</p>
+              <h3>Maha Casa Villa</h3>
+              <p>Hulu Langat, Selangor</p>
+              <p>Please use the location buttons below for navigation. Kindly arrive early to enjoy the garden ambience and avoid traffic delays.</p>
+              <div class="button-row" style="justify-content:flex-start;">
+                <a class="btn primary" href="https://waze.com/ul/hw283v605b" target="_blank" rel="noopener">Open Waze</a>
+                <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Maha%20Casa%20Villa%20Hulu%20Langat" target="_blank" rel="noopener">Open Google Maps</a>
+              </div>
+            </div>
+            <div class="map-preview">
+              <span>Maha Casa Villa, Hulu Langat</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="rsvp">
+        <div class="container">
+          <div class="section-title reveal">
+            <p class="eyebrow">RSVP</p>
+            <h2>Will You Be There?</h2>
+            <p>Your presence would mean so much to us. Kindly confirm your attendance before the wedding day.</p>
+          </div>
+
+          <div class="rsvp-card glass-card reveal">
+            <form id="rsvpForm">
+              <label>
+                Full Name
+                <input type="text" id="guestName" name="name" placeholder="Enter your name" required>
+              </label>
+
+              <div class="form-row">
+                <label>
+                  Attendance
+                  <select id="attendance" name="attendance" required>
+                    <option value="">Select attendance</option>
+                    <option value="Attending">Attending</option>
+                    <option value="Not Attending">Not Attending</option>
+                  </select>
+                </label>
+
+                <label>
+                  Total Pax
+                  <select id="pax" name="pax" required>
+                    <option value="">Select pax</option>
+                    <option value="1">1 Pax</option>
+                    <option value="2">2 Pax</option>
+                  </select>
+                </label>
+              </div>
+
+              <label>
+                Your Wishes
+                <textarea id="wish" name="wish" placeholder="Write your wishes for the couple"></textarea>
+              </label>
+
+              <button class="btn primary" type="submit">Submit RSVP</button>
+              <div class="submit-message" id="submitMessage">
+                Thank you for your response. Your wishes have been received with love.
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="wishes">
+        <div class="container">
+          <div class="section-title reveal">
+            <p class="eyebrow">Guest Wishes</p>
+            <h2>Wishes from Our Guests</h2>
+            <p>A little garden of beautiful words from family and friends.</p>
+          </div>
+
+          <div class="wishes-grid" id="wishesGrid">
+            <div class="wish-card glass-card">
+              <p>“May your marriage be filled with love, barakah and endless happiness.”</p>
+              <strong>— Guest</strong>
+            </div>
+            <div class="wish-card glass-card">
+              <p>“Wishing both of you a lifetime of joy, patience and beautiful memories together.”</p>
+              <strong>— Guest</strong>
+            </div>
+            <div class="wish-card glass-card">
+              <p>“May this new chapter bloom like a garden full of blessings.”</p>
+              <strong>— Guest</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container">
+          <div class="section-title reveal">
+            <p class="eyebrow">Contact</p>
+            <h2>Need Help?</h2>
+            <p>For any inquiries, kindly contact the family representatives below.</p>
+          </div>
+
+          <div class="contact-grid">
+            <div class="contact-card glass-card reveal">
+              <h3>Khalisha</h3>
+              <p>Bride’s Family<br>012-694 4907</p>
+              <div class="button-row">
+                <a class="btn primary" href="https://wa.me/60126944907" target="_blank" rel="noopener">WhatsApp</a>
+                <a class="btn" href="tel:+60126944907">Call</a>
+              </div>
+            </div>
+
+            <div class="contact-card glass-card reveal">
+              <h3>Yasmin</h3>
+              <p>Groom’s Family<br>017-846 1308</p>
+              <div class="button-row">
+                <a class="btn primary" href="https://wa.me/60178461308" target="_blank" rel="noopener">WhatsApp</a>
+                <a class="btn" href="tel:+60178461308">Call</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-names">Fariz & Elia</div>
+      <p>12 September 2026 • Maha Casa Villa, Hulu Langat</p>
+    </footer>
+  </div>
+
+  <script>
+    /*
+      GOOGLE SHEETS CONNECTION
+      1. Create a Google Sheet.
+      2. Add Apps Script code from ChatGPT.
+      3. Deploy as Web App.
+      4. Paste your Web App URL below.
+    */
+    const GOOGLE_SCRIPT_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+    const weddingDate = new Date("2026-09-12T00:00:00+08:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      if (distance <= 0) {
+        document.getElementById("days").textContent = "000";
+        document.getElementById("hours").textContent = "00";
+        document.getElementById("minutes").textContent = "00";
+        document.getElementById("seconds").textContent = "00";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").textContent = String(days).padStart(3, "0");
+      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    const form = document.getElementById("rsvpForm");
+    const wishesGrid = document.getElementById("wishesGrid");
+    const submitMessage = document.getElementById("submitMessage");
+
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const submitButton = form.querySelector("button[type='submit']");
+      const name = document.getElementById("guestName").value.trim();
+      const attendance = document.getElementById("attendance").value;
+      const pax = document.getElementById("pax").value;
+      const wish = document.getElementById("wish").value.trim();
+
+      if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("PASTE_YOUR")) {
+        alert("Please paste your Google Apps Script Web App URL in GOOGLE_SCRIPT_URL first.");
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Submitting...";
+
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("attendance", attendance);
+      formData.append("pax", pax);
+      formData.append("wish", wish);
+      formData.append("submittedAt", new Date().toLocaleString("en-MY", { timeZone: "Asia/Kuala_Lumpur" }));
+
+      try {
+        /*
+          mode: "no-cors" helps static websites submit to Google Apps Script
+          without browser CORS blocking. Because of no-cors, we show success
+          after the request is sent instead of reading the server response.
+        */
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          body: formData
+        });
+
+        if (wish) {
+          const card = document.createElement("div");
+          card.className = "wish-card glass-card";
+          card.innerHTML = `
+            <p>“${escapeHtml(wish)}”</p>
+            <strong>— ${escapeHtml(name || "Guest")}</strong>
+          `;
+          wishesGrid.prepend(card);
+        }
+
+        submitMessage.style.display = "block";
+        submitMessage.textContent = "Thank you for your response. Your RSVP has been submitted successfully.";
+        form.reset();
+      } catch (error) {
+        submitMessage.style.display = "block";
+        submitMessage.textContent = "Sorry, your RSVP could not be submitted. Please try again.";
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Submit RSVP";
+
+        setTimeout(() => {
+          submitMessage.style.display = "none";
+        }, 6000);
+      }
+    });
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    </script>
+</body>
+</html>
