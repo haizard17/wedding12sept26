@@ -1230,9 +1230,10 @@
           </div>
 
           <div class="wishes-grid" id="wishesGrid">
-            <div class="wish-card glass-card"><p>“May your marriage be filled with love, barakah and endless happiness.”</p><strong>— Guest</strong></div>
-            <div class="wish-card glass-card"><p>“Wishing both of you a lifetime of joy, patience and beautiful memories together.”</p><strong>— Guest</strong></div>
-            <div class="wish-card glass-card"><p>“May this new chapter bloom like a garden full of blessings.”</p><strong>— Guest</strong></div>
+            <div class="wish-card glass-card">
+              <p>Loading wishes from guests...</p>
+              <strong>— Please wait</strong>
+            </div>
           </div>
         </div>
       </section>
@@ -1359,18 +1360,18 @@
       formData.append("submittedAt", new Date().toLocaleString("en-MY", { timeZone: "Asia/Kuala_Lumpur" }));
 
       try {
-        await fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", body: formData });
-
-        if (wish) {
-          const card = document.createElement("div");
-          card.className = "wish-card glass-card";
-          card.innerHTML = `<p>“${escapeHtml(wish)}”</p><strong>— ${escapeHtml(name || "Guest")}</strong>`;
-          wishesGrid.prepend(card);
-        }
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          body: formData
+        });
 
         submitMessage.style.display = "block";
         submitMessage.textContent = "Thank you for your response. Your RSVP has been submitted successfully.";
         form.reset();
+
+        // Reload saved wishes from Google Sheets after submit.
+        setTimeout(loadWishesFromSheet, 1500);
       } catch (error) {
         submitMessage.style.display = "block";
         submitMessage.textContent = "Sorry, your RSVP could not be submitted. Please try again.";
@@ -1384,11 +1385,70 @@
       }
     });
 
+    function loadWishesFromSheet() {
+      if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("PASTE_YOUR")) {
+        showDefaultWishes();
+        return;
+      }
+
+      const oldScript = document.getElementById("wishesJsonpScript");
+      if (oldScript) oldScript.remove();
+
+      const script = document.createElement("script");
+      script.id = "wishesJsonpScript";
+      script.src = GOOGLE_SCRIPT_URL + "?action=getWishes&callback=displayGuestWishes&cache=" + Date.now();
+      script.onerror = showDefaultWishes;
+      document.body.appendChild(script);
+    }
+
+    function displayGuestWishes(data) {
+      wishesGrid.innerHTML = "";
+
+      const wishes = Array.isArray(data.wishes) ? data.wishes : [];
+
+      if (wishes.length === 0) {
+        wishesGrid.innerHTML = `
+          <div class="wish-card glass-card">
+            <p>Be the first to leave a wish for the couple.</p>
+            <strong>— Guest Wishes</strong>
+          </div>
+        `;
+        return;
+      }
+
+      wishes.forEach(item => {
+        const name = item.name || "Guest";
+        const wish = item.wish || "";
+
+        if (!wish.trim()) return;
+
+        const card = document.createElement("div");
+        card.className = "wish-card glass-card";
+        card.innerHTML = `
+          <p>“${escapeHtml(wish)}”</p>
+          <strong>— ${escapeHtml(name)}</strong>
+        `;
+        wishesGrid.appendChild(card);
+      });
+    }
+
+    function showDefaultWishes() {
+      wishesGrid.innerHTML = `
+        <div class="wish-card glass-card">
+          <p>Wishes will appear here after guests submit their RSVP.</p>
+          <strong>— Guest Wishes</strong>
+        </div>
+      `;
+    }
+
     function escapeHtml(text) {
       const div = document.createElement("div");
       div.textContent = text;
       return div.innerHTML;
     }
+
+    // Load guest wishes from Google Sheets when website opens.
+    window.addEventListener("load", loadWishesFromSheet);
   </script>
 </body>
 </html>
