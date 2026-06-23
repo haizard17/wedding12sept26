@@ -1,0 +1,73 @@
+<form id="rsvpForm">
+  <input type="text" name="name" placeholder="Your Name" required>
+
+  <select name="attendance" required>
+    <option value="">Attendance</option>
+    <option value="Attending">Attending</option>
+    <option value="Not Attending">Not Attending</option>
+  </select>
+
+  <select name="pax" id="pax" required>
+    <option value="">Total Pax</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <input type="number" id="otherPax" placeholder="Enter pax" style="display:none;">
+
+  <textarea name="wishes" placeholder="Your wishes"></textarea>
+
+  <button type="submit">Submit RSVP</button>
+</form>
+
+<h3>Guest Wishes</h3>
+<div id="wishesList"></div>
+
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycby7AOfNSIbaD6hwd4LbVNQ18m3lVcnQxNdl_33ZWYwOMTkVlvGvqoRpbNKkn9LmMMv3/exec";
+
+const paxSelect = document.getElementById("pax");
+const otherPax = document.getElementById("otherPax");
+
+paxSelect.addEventListener("change", () => {
+  otherPax.style.display = paxSelect.value === "Other" ? "block" : "none";
+});
+
+document.getElementById("rsvpForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+
+  const data = {
+    name: form.name.value,
+    attendance: form.attendance.value,
+    pax: paxSelect.value === "Other" ? otherPax.value : paxSelect.value,
+    wishes: form.wishes.value
+  };
+
+  await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify(data)
+  });
+
+  alert("Thank you! Your RSVP has been submitted.");
+  form.reset();
+  otherPax.style.display = "none";
+  loadWishes();
+});
+
+async function loadWishes() {
+  const res = await fetch(scriptURL);
+  const wishes = await res.json();
+
+  document.getElementById("wishesList").innerHTML = wishes.map(item => `
+    <div style="margin-bottom:15px;">
+      <strong>${item.name}</strong><br>
+      <span>${item.wishes}</span>
+    </div>
+  `).join("");
+}
+
+loadWishes();
+</script>
